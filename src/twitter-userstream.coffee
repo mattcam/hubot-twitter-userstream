@@ -76,6 +76,7 @@ class Twitter extends Hubot.Adapter
 
       stream.on 'user_event', (event) =>
         return if @botUser.id == event.source.id
+        console.log (event)
         switch event.event
           when 'favorite'
             @robot.emit 'favorited', {
