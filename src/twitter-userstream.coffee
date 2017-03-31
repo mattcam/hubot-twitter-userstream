@@ -75,8 +75,7 @@ class Twitter extends Hubot.Adapter
         @receive tmsg
 
       stream.on 'user_event', (event) =>
-        return if @botUser.id == event.source.id
-        console.log (event)
+        return if @botUser.id == event.source.id_str
         switch event.event
           when 'favorite'
             @robot.emit 'favorited', {
@@ -90,7 +89,7 @@ class Twitter extends Hubot.Adapter
             }
           when 'follow'
             @robot.emit 'followed', {
-              user: @robot.brain.userForId event.source.id, {name: event.source.screen_name, room: 'Twitter'}
+              user: @robot.brain.userForId event.source.id_str, {name: event.source.screen_name, room: 'Twitter'}
             }
           when 'unfollow'
             @robot.emit 'unfollowed', {
